@@ -405,7 +405,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.gradient_select.setCurrentIndex(1)
+        self.gradient_select.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -439,7 +439,7 @@ class Ui_MainWindow(object):
         self.gradient_box.setTitle(QCoreApplication.translate("MainWindow", u"Gradient", None))
         self.gradient_select.setItemText(0, QCoreApplication.translate("MainWindow", u"None (Black)", None))
         self.gradient_select.setItemText(1, QCoreApplication.translate("MainWindow", u"Preset 1 (pink to green)", None))
-        self.gradient_select.setItemText(2, QCoreApplication.translate("MainWindow", u"Preset 2", None))
+        self.gradient_select.setItemText(2, QCoreApplication.translate("MainWindow", u"Last Custom", None))
 
         self.btn_customize.setText(QCoreApplication.translate("MainWindow", u"Customize...", None))
         self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
