@@ -100,7 +100,7 @@ def generate_gradient_preview_image(gradient=grad_none):
 def draw_dummy_first_column(row_num, norm_val):
     for num in range(10):
         color = STERO_COLOR_GRADIENT(num)
-        draw.text((FONT_SPACING * num + norm_val, row_num*ROW_SPACING), 
+        draw.text((FONT_SPACING * num + norm_val * OFFSET, row_num*ROW_SPACING), 
                   str(num), 
                   font=font, 
                   fill=color)
