@@ -347,17 +347,8 @@ class MainWindow(QMainWindow):
 
     # ========================= Interface Functions w Color Picker ========================
 
-    def generate_one_line_gradient_preview(self, s_color, t_color):
-        """
-        args:
-            s_color (qColor): start color
-            t_color (qColor): end colorS
-
-        generates a one-line preview to see how the color gradient will look like
-        returns nothing, but saves the files into filename
-        """
-
-        pass
+    def generate_one_line_gradient_preview(self, grad_function_callable):
+        sn.generate_gradient_preview_image(grad_function_callable)
 
 
     # =================================== Dbg functions ===================================

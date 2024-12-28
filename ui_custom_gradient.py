@@ -169,13 +169,13 @@ class Ui_Dialog(QDialog):
 
         self.verticalLayout.addWidget(self.groupBox)
 
-        self.LinePreview = QLabel(Dialog)
-        self.LinePreview.setObjectName(u"LinePreview")
-        self.LinePreview.setMaximumSize(QSize(16777215, 40))
-        self.LinePreview.setPixmap(QPixmap(u"gradient_preview_placeholder.png"))
-        self.LinePreview.setAlignment(Qt.AlignCenter)
+        self.line_preview = QLabel(Dialog)
+        self.line_preview.setObjectName(u"line_preview")
+        self.line_preview.setMaximumSize(QSize(16777215, 40))
+        self.line_preview.setPixmap(QPixmap(u"gradient_preview.png"))
+        self.line_preview.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.LinePreview)
+        self.verticalLayout.addWidget(self.line_preview)
 
         self.line_edit_save_gradient = QLineEdit(Dialog)
         self.line_edit_save_gradient.setObjectName(u"line_edit_save_gradient")
@@ -205,7 +205,7 @@ class Ui_Dialog(QDialog):
         self.btn_edit_start_color.setText("")
         self.end_color_label.setText(QCoreApplication.translate("Dialog", u"<html><head/><body><p>End Color: <span style=\" font-weight:700;\">(85, 170, 127)</span></p></body></html>", None))
         self.btn_edit_end_color.setText("")
-        self.LinePreview.setText("")
+        self.line_preview.setText("")
         self.line_edit_save_gradient.setPlaceholderText(QCoreApplication.translate("Dialog", u"Save as...", None))
     # retranslateUi
 
