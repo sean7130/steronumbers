@@ -62,6 +62,7 @@ class CustomGradientWindow(Ui_Dialog):
 
         # by now we assume the image is generated, we will look for 'gradient_preview.png'
         self.line_preview.setPixmap("gradient_preview.png")
+        return custom_grad_function
 
     def update_color(self, associated_button=None, associated_label=None, color_type=None):
         """
@@ -72,7 +73,6 @@ class CustomGradientWindow(Ui_Dialog):
         """
 
         color = QColorDialog.getColor()
-        print(type(color))
         if color.isValid():
             self.selected_colors[color_type] = color
             r = color.red()
@@ -96,7 +96,11 @@ class CustomGradientWindow(Ui_Dialog):
 
             associated_label.setText(f"<html><head/><body><p>{color_type}: <span style=\" font-weight:700;\">({r}, {g}, {b})</span></p></body></html>")
 
-            self.generate_and_set_preview()
+            user_custom_grad = self.generate_and_set_preview()
+
+            # TODO: next two lines need to be streamlined in the future to support multiple custom gradients
+            self.mainwindow.custom_gradient_functions.append(user_custom_grad)
+            self.mainwindow.collection_gradients[-1] = user_custom_grad
 
 def get_gradient_diaglog(mainwindow):
     ret = CustomGradientWindow(mainwindow)

@@ -76,18 +76,16 @@ class MainWindow(QMainWindow):
         self.ui.source_numbers_text.textChanged.connect(self.src_num_changed)
         self.ui.import_btn.clicked.connect(self.import_via_builtin_file_select)
 
-        
-        self.ui.save_btn.clicked.connect(self.spawn_custom_gradient_window) #TODO remove later
-
         # ======================== gradient combo box =======================
         self.ui.gradient_select.currentIndexChanged.connect(self.update_gradient_settings)
         self.collection_gradients = [sn.grad_none, 
                                      sn.grad_pink_to_green,
                                      sn.grad_pink_to_green]
 
-        # ====================== gradient custom button =====================
+        # ====================== gradient customs =====================
         self.ui.btn_customize.clicked.connect(self.spawn_custom_gradient_window)
-        self.diag_gradient_is_setup = False
+        self.custom_gradient_dialog_been_setup = False
+        self.custom_gradient_functions = [] #TODO: support more than one gradient callable
 
         # =========================== preview_img =========================== 
         self.reload_image()
@@ -338,11 +336,11 @@ class MainWindow(QMainWindow):
 
     # def setup_gradient_diag_logic(self, grad_diag):
     #     grad_diag.btn_edit_start_color.clicked.connect(self.report_window_height)
-
+    # ========================== Spawning Custom Color Picker ==========================
     def spawn_custom_gradient_window(self):
-        if not self.diag_gradient_is_setup:
+        if not self.custom_gradient_dialog_been_setup:
             self.ui_gradient_diag = color_select_dialog.get_gradient_diaglog(self)
-            self.diag_gradient_is_setup = True
+            self.custom_gradient_dialog_been_setup = True
         self.ui_gradient_diag.exec_()
 
     # ========================= Interface Functions w Color Picker ========================
