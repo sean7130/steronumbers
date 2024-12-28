@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import time
+import color_select_dialog
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
 from ui_custom_gradient import *
@@ -335,16 +336,29 @@ class MainWindow(QMainWindow):
         sn.STERO_COLOR_GRADIENT = self.collection_gradients[new_idx]
         self.reload_image()
 
-    def setup_gradient_diag_logic(self, grad_diag):
-        grad_diag.btn_edit_start_color.clicked.connect(self.report_window_height)
+    # def setup_gradient_diag_logic(self, grad_diag):
+    #     grad_diag.btn_edit_start_color.clicked.connect(self.report_window_height)
 
     def spawn_custom_gradient_window(self):
         if not self.diag_gradient_is_setup:
-            self.ui_gradient_diag = Ui_Dialog()
-            self.ui_gradient_diag.setupUi(self.ui_gradient_diag)
-            self.setup_gradient_diag_logic(self.ui_gradient_diag)
+            self.ui_gradient_diag = color_select_dialog.get_gradient_diaglog(self)
             self.diag_gradient_is_setup = True
         self.ui_gradient_diag.exec_()
+
+    # ========================= Interface Functions w Color Picker ========================
+
+    def generate_one_line_gradient_preview(self, s_color, t_color):
+        """
+        args:
+            s_color (qColor): start color
+            t_color (qColor): end colorS
+
+        generates a one-line preview to see how the color gradient will look like
+        returns nothing, but saves the files into filename
+        """
+
+        pass
+
 
     # =================================== Dbg functions ===================================
     def read_value_out(self, value):
@@ -353,11 +367,6 @@ class MainWindow(QMainWindow):
     def report_window_height(self):
         print(f"frame dim: {self.ui.vframe_preview.width()} {self.ui.vframe_preview.height()}")
         print(f"label dim: {self.ui.img_preview_label.width()} {self.ui.img_preview_label.height()}")
-
-    def attempt_popup(self):
-        gradient_diag = Ui_Dialog()
-        gradient_diag.setupUi(gradient_diag)
-        gradient_diag.exec_()
 
     def report_resize(self, event):
         event_size = event.size()
