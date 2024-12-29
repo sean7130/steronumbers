@@ -331,7 +331,7 @@ class Ui_MainWindow(object):
         self.l_shift.setFrameShape(QFrame.StyledPanel)
         self.l_shift.setFrameShadow(QFrame.Raised)
         self.verticalLayout_9 = QVBoxLayout(self.l_shift)
-        self.verticalLayout_9.setSpacing(0)
+        self.verticalLayout_9.setSpacing(6)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_7 = QHBoxLayout()
@@ -353,10 +353,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_7.addItem(self.horizontalSpacer_2)
 
-        self.pushButton_3 = QPushButton(self.l_shift)
-        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.refresh_btn = QPushButton(self.l_shift)
+        self.refresh_btn.setObjectName(u"refresh_btn")
 
-        self.horizontalLayout_7.addWidget(self.pushButton_3)
+        self.horizontalLayout_7.addWidget(self.refresh_btn)
 
         self.save_btn = QPushButton(self.l_shift)
         self.save_btn.setObjectName(u"save_btn")
@@ -405,7 +405,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.gradient_select.setCurrentIndex(1)
+        self.gradient_select.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -442,7 +442,7 @@ class Ui_MainWindow(object):
         self.gradient_select.setItemText(2, QCoreApplication.translate("MainWindow", u"Last Custom", None))
 
         self.btn_customize.setText(QCoreApplication.translate("MainWindow", u"Customize...", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
+        self.refresh_btn.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
         self.save_btn.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menuPresets.setTitle(QCoreApplication.translate("MainWindow", u"Presets", None))
