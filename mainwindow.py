@@ -66,6 +66,8 @@ class MainWindow(QMainWindow):
                                                 self.ui.height_adjust_spinbox,
                                                 self.ui.height_label,
                                                 self.ui.width_label]
+        # =========================== menu actions =========================== 
+        self.ui.actionAdd_Preset.triggered.connect(self.save_preset)
 
         # =========================== checkboxes =========================== 
         self.ui.check_auto_column.stateChanged.connect(self.check_auto_col)
@@ -331,6 +333,8 @@ class MainWindow(QMainWindow):
             name = f"{self.ui.gradient_select.count()}-Custom"
         self.ui.gradient_select.addItem(name)
 
+    def save_preset(self):
+        print("To be implemented")
 
     # def setup_gradient_diag_logic(self, grad_diag):
     #     grad_diag.btn_edit_start_color.clicked.connect(self.report_window_height)
