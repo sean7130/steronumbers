@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog
 from ui_custom_gradient import *
 
@@ -6,25 +6,42 @@ START_COLOR_STR = "Start Color"
 END_COLOR_STR = "End Color"
 
 class GradientCallable():
-    def __init__(self, start_color, end_color):
-        self.start_color = start_color
-        self.start_rgb = [start_color.red(), start_color.green(), start_color.blue()]
+    def __init__(self, start_color=None, end_color=None):
+        if start_color and end_color:
+            self.__setup_gradient_object(start_color, end_color)
+        else:
+            self.grad_function = lambda x: (0, 0, 0)
+            self.dump_data = lambda: ""
 
-        self.end_color = end_color
+    #TODO: remove & replace this one later
+    def __setup_gradient_object(self, start_color, end_color):
+            self.start_color = start_color
+            self.start_rgb = [start_color.red(), start_color.green(), start_color.blue()]
+            self.end_color = end_color
 
-        # determines the color differences between the RGB channel
-        self.deltas = [
-            end_color.red() - start_color.red(),
-            end_color.green() - start_color.green(),
-            end_color.blue() - start_color.blue()
-        ]
+            # determines the color differences between the RGB channel
+            self.deltas = [
+                end_color.red() - start_color.red(),
+                end_color.green() - start_color.green(),
+                end_color.blue() - start_color.blue()
+            ]
 
-        # using delta, now determine increments, which by design of how gradient functions work,
-        # they will have a total of 10 increment, therefore they are each delta / 10 (or 9,
-        # depending on if we want to push close to the end color or not)
-        self.increments = [e/9 for e in self.deltas]
+            # using delta, now determine increments, which by design of how gradient functions work,
+            # they will have a total of 10 increment, therefore they are each delta / 10 (or 9,
+            # depending on if we want to push close to the end color or not)
+            self.increments = [e/9 for e in self.deltas]
 
-    def grad_function(self, num):
+            # This will be set upon accept (within add_new_gradient of mainwindow)
+            # Alternatively, restore_from_file_data will set this field too
+            self.name = None 
+
+            self.grad_function = self.__grad_function
+            self.dump_data = self.__dump_data
+
+    def __str__(self):
+        return f"{self.start_rgb}->{[self.end_color.red(), self.end_color.green(), self.end_color.blue()]}"
+
+    def __grad_function(self, num):
         """
         args: 
             num (int):  a range from 0-9, where 0 is closest to self.start_color,
@@ -35,6 +52,29 @@ class GradientCallable():
         return (int(self.start_rgb[0]+self.increments[0]*num),
                 int(self.start_rgb[1]+self.increments[1]*num),
                 int(self.start_rgb[2]+self.increments[2]*num))
+
+    def __dump_data(self):
+        ret = f"{self.name}, {str(self.start_rgb)[1:-1]}, {self.end_color.red()}, {self.end_color.green()}, {self.end_color.blue()}"
+        return ret
+
+    #TODO: make better interfaces for this
+    def save_one_to_file(self, filename):
+        fd = open(filename, "w")
+        fd.write(self.dump_data)
+        fd.close()
+
+    def restore_from_file_data(self, data):
+        splitted = data.split(",")
+        formatted_data = [e.strip() for e in splitted]
+        self.__setup_gradient_object(QColor(int(formatted_data[1]),
+                                            int(formatted_data[2]),
+                                            int(formatted_data[3])),
+                                     QColor(int(formatted_data[4]),
+                                            int(formatted_data[5]),
+                                            int(formatted_data[6]))
+                                     )
+
+        self.name = formatted_data[0]
 
 
 class CustomGradientWindow(Ui_Dialog):
@@ -72,8 +112,8 @@ class CustomGradientWindow(Ui_Dialog):
         # by now we assume the image is generated, we will look for 'gradient_preview.png'
         self.line_preview.setPixmap("gradient_preview.png")
 
-        self.mainwindow.collection_gradients[self.mainwindow.last_custom_slot] = custom_grad_function
-        self.pending_gradient = custom_grad_function
+        self.mainwindow.collection_gradients[self.mainwindow.last_unsaved_custom_slot] = custom_grad_function
+        self.pending_gradient = g
         return custom_grad_function
 
     def update_color(self, associated_button=None, associated_label=None, color_type=None):
@@ -111,8 +151,8 @@ class CustomGradientWindow(Ui_Dialog):
             self.generate_and_set_preview()
             
             # special case if the gradent seelect combobox is selected on "last custom", then update
-            if self.mainwindow.ui.gradient_select.currentIndex() == self.mainwindow.last_custom_slot:
-                self.mainwindow.update_gradient_settings(self.mainwindow.last_custom_slot)
+            if self.mainwindow.ui.gradient_select.currentIndex() == self.mainwindow.last_unsaved_custom_slot:
+                self.mainwindow.update_gradient_settings(self.mainwindow.last_unsaved_custom_slot)
             
 
 def get_gradient_diaglog(mainwindow):

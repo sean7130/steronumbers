@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(923, 644)
+        MainWindow.resize(833, 559)
         MainWindow.setTabShape(QTabWidget.Rounded)
         self.actionthis_also_does_something = QAction(MainWindow)
         self.actionthis_also_does_something.setObjectName(u"actionthis_also_does_something")
@@ -306,7 +306,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6.addWidget(self.img_preview_label)
 
-        self.horizontalSpacer_4 = QSpacerItem(235, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_6.addItem(self.horizontalSpacer_4)
 
@@ -388,7 +388,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
-        self.menuBar.setGeometry(QRect(0, 0, 923, 22))
+        self.menuBar.setGeometry(QRect(0, 0, 833, 22))
         self.menuFile = QMenu(self.menuBar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuPresets = QMenu(self.menuBar)

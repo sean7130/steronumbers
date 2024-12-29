@@ -68,6 +68,7 @@ class MainWindow(QMainWindow):
                                                 self.ui.width_label]
         # =========================== menu actions =========================== 
         self.ui.actionAdd_Preset.triggered.connect(self.save_preset)
+        self.ui.actionLoad_Preset.triggered.connect(self.load_preset)
 
         # =========================== checkboxes =========================== 
         self.ui.check_auto_column.stateChanged.connect(self.check_auto_col)
@@ -85,9 +86,11 @@ class MainWindow(QMainWindow):
                                      sn.grad_pink_to_green, # idx=2: for now this one will serve as the last defined gradient
                                      sn.grad_hue,
                                      sn.grad_bg]
+        self._preset_gradient_count = len(self.collection_gradients)
         self.ui.gradient_select.addItem("Hue")
         self.ui.gradient_select.addItem("Black-Gray")
-        self.last_custom_slot = 2
+        self.last_unsaved_custom_slot = 2
+        self.custom_gradient_objects = []
 
         # ====================== gradient customs =====================
         self.ui.btn_customize.clicked.connect(self.spawn_custom_gradient_window)
@@ -328,13 +331,57 @@ class MainWindow(QMainWindow):
         self.reload_image()
 
     def add_new_gradient(self, gradient, name=""):
-        self.collection_gradients.append(gradient)
+        self.collection_gradients.append(gradient.grad_function)
+        self.custom_gradient_objects.append(gradient)
         if name == "":
             name = f"{self.ui.gradient_select.count()}-Custom"
+        gradient.name = name
         self.ui.gradient_select.addItem(name)
 
+    def spawn_file_dialog(self, title, filter, mode="s"):
+        if mode == "s":
+            file_dialog  = QFileDialog.getSaveFileName
+        else:
+            file_dialog = QFileDialog.getOpenFileName
+        path, _ = file_dialog(
+            self,                   # Parent widget
+            title,                  # Dialog title
+            "",                     # Default directory or file name
+            filter                  # File filter
+        )
+
+        return path 
+
+
     def save_preset(self):
-        print("To be implemented")
+        filepath = self.spawn_file_dialog("Save Gradient Presets",
+                                          "Gradient Presets (*.g_preset);;All Files (*)")
+        if filepath:
+            fd = open(filepath, "w")
+            for g in self.custom_gradient_objects:
+                fd.write(g.dump_data())
+                fd.write("\n")
+            fd.flush()
+            fd.close()
+
+    def load_preset(self):
+        filepath = self.spawn_file_dialog("Load Gradient Presets",
+                                          "Gradient Presets (*.g_preset);;All Files (*)",
+                                          mode="l")
+        if filepath:
+            fd = open(filepath, "r")
+            data = fd.readline().strip()
+            load_count = 0
+            while data != "":
+                new_g = color_select_dialog.GradientCallable()
+                new_g.restore_from_file_data(data)
+                self.add_new_gradient(new_g, new_g.name)
+                load_count += 1
+
+                data = fd.readline().strip()
+
+            fd.close()
+
 
     # def setup_gradient_diag_logic(self, grad_diag):
     #     grad_diag.btn_edit_start_color.clicked.connect(self.report_window_height)
