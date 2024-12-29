@@ -80,28 +80,19 @@ class MainWindow(QMainWindow):
         self.ui.gradient_select.currentIndexChanged.connect(self.update_gradient_settings)
         self.collection_gradients = [sn.grad_none, 
                                      sn.grad_pink_to_green,
-                                     sn.grad_pink_to_green]
+                                     sn.grad_pink_to_green, # idx=2: for now this one will serve as the last defined gradient
+                                     sn.grad_hue,
+                                     sn.grad_bg]
+        self.ui.gradient_select.addItem("Hue")
+        self.ui.gradient_select.addItem("Black-Gray")
+        self.last_custom_slot = 2
 
         # ====================== gradient customs =====================
         self.ui.btn_customize.clicked.connect(self.spawn_custom_gradient_window)
         self.custom_gradient_dialog_been_setup = False
-        self.custom_gradient_functions = [] #TODO: support more than one gradient callable
 
         # =========================== preview_img =========================== 
         self.reload_image()
-
-    # def cycleImg100(self):
-    #     for i in range(10):
-    #         print(f"{i}")
-    #         time.sleep(0.1)
-    #         self.cycleImg()
-
-    # def cycleImg(self):
-    #     if self.imageChair:
-    #         self.ui.label.setPixmap("2.jpg")
-    #     else: 
-    #         self.ui.label.setPixmap("science.png")
-    #     self.imageChair = not(self.imageChair)
 
     def spinbox_slider_setup_boilerplate(self):
         self._spinbox_to_slider = dict()
@@ -279,7 +270,7 @@ class MainWindow(QMainWindow):
 
     def update_stero_module_parameters(self):
         """
-        function updates the parameters of the stero_numbers module
+        function updates the parameters of the steronumbers module
         based on the current settings displayed on the UI (spinboxes)
 
         setting includes: FONT_SPACING, COL_SPACING, ROW_SPACING, OFFSET
@@ -289,8 +280,8 @@ class MainWindow(QMainWindow):
         handled elsewhere.
         """
 
-        # TODO: decide if width, hegiht of an image should be considered
-        # update: update width and height with the functon below
+        # TODO: decide if width, height of an image should be considered
+        # update: update width and height with the function below
         sn.FONT_SPACING = int(self.get_font_spacing())
         sn.COL_SPACING = int(self.get_col_spacing())
         sn.ROW_SPACING = int(max(self.get_row_spacing(), 1))
@@ -333,6 +324,13 @@ class MainWindow(QMainWindow):
     def update_gradient_settings(self, new_idx):
         sn.STERO_COLOR_GRADIENT = self.collection_gradients[new_idx]
         self.reload_image()
+
+    def add_new_gradient(self, gradient, name=""):
+        self.collection_gradients.append(gradient)
+        if name == "":
+            name = f"{self.ui.gradient_select.count()}-Custom"
+        self.ui.gradient_select.addItem(name)
+
 
     # def setup_gradient_diag_logic(self, grad_diag):
     #     grad_diag.btn_edit_start_color.clicked.connect(self.report_window_height)

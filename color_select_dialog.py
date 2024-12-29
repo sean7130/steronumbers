@@ -42,12 +42,21 @@ class CustomGradientWindow(Ui_Dialog):
         super().__init__()
         self.mainwindow = parent
         self.setupUi(self)
+
+        # =============================== Setup =============================== 
+        self.selected_colors = {START_COLOR_STR: QColor(170,255,0), END_COLOR_STR: QColor(85,170,127)}
+        self.generate_and_set_preview() # for the init colors
+
+        # ============================== Buttons ============================== 
         self.btn_edit_start_color.clicked.connect(self.determine_start_color)
         self.btn_edit_end_color.clicked.connect(self.determine_end_color)
 
-        self.selected_colors = {START_COLOR_STR: QColor(170,255,0), END_COLOR_STR: QColor(85,170,127)}
-
-        self.generate_and_set_preview() # for the init colors
+    def accept(self):
+        self.mainwindow.add_new_gradient(self.pending_gradient, self.line_edit_save_gradient.text())
+        gradient_count = self.mainwindow.ui.gradient_select.count()
+        if gradient_count != len(self.mainwindow.collection_gradients): 
+            print(f"WARN: grad combobox count mismatch with collection_gradients: {gradient_count}!={len(self.mainwindow.collection_gradients)}")
+        self.mainwindow.ui.gradient_select.setCurrentIndex(gradient_count-1)
 
     def determine_start_color(self):
         self.update_color(self.btn_edit_start_color, self.start_color_label, START_COLOR_STR)
@@ -62,6 +71,9 @@ class CustomGradientWindow(Ui_Dialog):
 
         # by now we assume the image is generated, we will look for 'gradient_preview.png'
         self.line_preview.setPixmap("gradient_preview.png")
+
+        self.mainwindow.collection_gradients[self.mainwindow.last_custom_slot] = custom_grad_function
+        self.pending_gradient = custom_grad_function
         return custom_grad_function
 
     def update_color(self, associated_button=None, associated_label=None, color_type=None):
@@ -96,11 +108,12 @@ class CustomGradientWindow(Ui_Dialog):
 
             associated_label.setText(f"<html><head/><body><p>{color_type}: <span style=\" font-weight:700;\">({r}, {g}, {b})</span></p></body></html>")
 
-            user_custom_grad = self.generate_and_set_preview()
-
-            # TODO: next two lines need to be streamlined in the future to support multiple custom gradients
-            self.mainwindow.custom_gradient_functions.append(user_custom_grad)
-            self.mainwindow.collection_gradients[-1] = user_custom_grad
+            self.generate_and_set_preview()
+            
+            # special case if the gradent seelect combobox is selected on "last custom", then update
+            if self.mainwindow.ui.gradient_select.currentIndex() == self.mainwindow.last_custom_slot:
+                self.mainwindow.update_gradient_settings(self.mainwindow.last_custom_slot)
+            
 
 def get_gradient_diaglog(mainwindow):
     ret = CustomGradientWindow(mainwindow)

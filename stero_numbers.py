@@ -9,8 +9,6 @@ ROW_SPACING = 25
 
 OFFSET = FONT_SPACING // 10
 
-#TODO: decide if these should be global
-#TODO: at least honor these settings here width, height = 820, 1061
 width, height = 600, 400 
 image = Image.new("RGB", (width, height), "white")
 draw = ImageDraw.Draw(image)
@@ -79,6 +77,27 @@ def grad_pink_to_green(num):
 def grad_none(num): # pure black
     return (0, 0, 0)
 
+def grad_hue(num):
+    return [
+        (255, 0, 0),      # Red
+        (255, 102, 0),    # Orange
+        (255, 204, 0),    # Golden Yellow
+        (170, 255, 0),    # Yellow-Green
+        (0, 255, 85),     # Green
+        (0, 255, 255),    # Cyan-Green
+        (0, 170, 255),    # Cyan-Blue
+        (0, 85, 255),     # Blue
+        (85, 0, 255),     # Violet
+        (170, 0, 255)     # Magenta
+    ][num]
+
+
+def grad_bg(num):
+    if num%2:
+        return (100, 100, 100)
+    return (0, 0, 0)
+
+
 def generate_gradient_preview_image(gradient=grad_none):
     """ 
     this is not the function that creates the sterogram:
@@ -142,7 +161,6 @@ def encode_numbers(numbers, filename="preview.png"):
 
     # This will add another (int) element at the ending of each row, denoting how many
     # values have been subtrated from orgional offset during normazation
-    # TODO: determine if there is a better idea to do this
     normalize_offset(offset, method="end")
 
     # check if normalization has been added, otherwise add another dummy norm
