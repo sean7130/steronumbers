@@ -405,7 +405,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.gradient_select.setCurrentIndex(0)
+        self.gradient_select.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
