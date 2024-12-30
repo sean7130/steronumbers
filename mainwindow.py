@@ -87,6 +87,7 @@ class MainWindow(QMainWindow):
                                      sn.grad_pink_to_green, # idx=2: for now this one will serve as the last defined gradient
                                      sn.grad_hue,
                                      sn.grad_bg]
+        sn.STERO_COLOR_GRADIENT = self.collection_gradients[self.ui.gradient_select.currentIndex()]
         self._preset_gradient_count = len(self.collection_gradients)
         self.ui.gradient_select.addItem("Hue")
         self.ui.gradient_select.addItem("Black-Gray")
