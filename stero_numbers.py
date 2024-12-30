@@ -74,6 +74,9 @@ def fill_last_row(unfinished):
 def grad_pink_to_green(num):
     return (200- num*18, 100 + num*10, 200-num*18)
 
+def grad_glacier(num):
+    return (149- int((149/9*num)), 114+int(56/9*num), 255)
+
 def grad_none(num): # pure black
     return (0, 0, 0)
 

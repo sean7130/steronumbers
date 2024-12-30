@@ -83,7 +83,7 @@ class MainWindow(QMainWindow):
         # ======================== gradient combo box =======================
         self.ui.gradient_select.currentIndexChanged.connect(self.update_gradient_settings)
         self.collection_gradients = [sn.grad_none, 
-                                     sn.grad_pink_to_green,
+                                     sn.grad_glacier,
                                      sn.grad_pink_to_green, # idx=2: for now this one will serve as the last defined gradient
                                      sn.grad_hue,
                                      sn.grad_bg]

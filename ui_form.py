@@ -438,7 +438,7 @@ class Ui_MainWindow(object):
         self.img_preview_label.setText(QCoreApplication.translate("MainWindow", u"image_displays_here", None))
         self.gradient_box.setTitle(QCoreApplication.translate("MainWindow", u"Gradient", None))
         self.gradient_select.setItemText(0, QCoreApplication.translate("MainWindow", u"None (Black)", None))
-        self.gradient_select.setItemText(1, QCoreApplication.translate("MainWindow", u"Preset 1 (pink to green)", None))
+        self.gradient_select.setItemText(1, QCoreApplication.translate("MainWindow", u"Glacier", None))
         self.gradient_select.setItemText(2, QCoreApplication.translate("MainWindow", u"Last Custom", None))
 
         self.btn_customize.setText(QCoreApplication.translate("MainWindow", u"Customize...", None))
