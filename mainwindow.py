@@ -70,6 +70,7 @@ class MainWindow(QMainWindow):
         # =========================== menu actions =========================== 
         self.ui.actionAdd_Preset.triggered.connect(self.spawn_save_preset_window)
         self.ui.actionLoad_Preset.triggered.connect(self.load_preset)
+        self.ui.actionImport_from_Text_File.triggered.connect(self.import_via_builtin_file_select)
 
         # =========================== checkboxes =========================== 
         self.ui.check_auto_column.stateChanged.connect(self.check_auto_col)
@@ -100,6 +101,9 @@ class MainWindow(QMainWindow):
 
         # =========================== preview_img =========================== 
         self.reload_image()
+
+        # === ;) ===
+        self.ui.refresh_btn.clicked.connect(self.close_elevator_button)
 
     def spinbox_slider_setup_boilerplate(self):
         self._spinbox_to_slider = dict()
@@ -392,7 +396,6 @@ class MainWindow(QMainWindow):
 
             fd.close()
 
-
     # def setup_gradient_diag_logic(self, grad_diag):
     #     grad_diag.btn_edit_start_color.clicked.connect(self.report_window_height)
     # ========================== Spawning Custom Color Picker ==========================
@@ -425,20 +428,24 @@ class MainWindow(QMainWindow):
         self.report_window_height()
 
     def import_via_builtin_file_select(self):
-        file_dialog = QFileDialog()
-        file_dialog.exec_()
-        selected_files = file_dialog.selectedFiles()
+        selected_files = self.spawn_file_dialog("Import Source Numbers", "All Files (*)", mode="l")
         # print("Selected files:", selected_files) # it's a list
-        fd = open(selected_files[0], "r")
-        lines = fd.readlines()
-        res = ""
-        for line in lines: 
-            res += line 
-        # print(f"attempting to set: {res}")
-        self.ui.source_numbers_text.setPlainText(res)
+        if selected_files:
+            fd = open(selected_files, "r")
+            lines = fd.readlines()
+            res = ""
+            for line in lines: 
+                res += line 
+            # print(f"attempting to set: {res}")
+            self.ui.source_numbers_text.setPlainText(res)
 
     def combo_box_report_idx(self, idx):
         print(idx)
+
+    # ==== closing elevator ====
+    def close_elevator_button(self):
+        "pressing refresh in this program is equvlent to pressing 'close' in a public elevator"
+        return 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

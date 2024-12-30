@@ -9,6 +9,8 @@ ROW_SPACING = 25
 
 OFFSET = FONT_SPACING // 10
 
+BACKGROUND_COLOR = (240,240,240)
+
 width, height = 600, 400 
 image = Image.new("RGB", (width, height), "white")
 draw = ImageDraw.Draw(image)
@@ -109,7 +111,7 @@ def generate_gradient_preview_image(gradient=grad_none):
     """
     col_repeat = 3
     required_width = (col_repeat-1)*COL_SPACING + 9*FONT_SPACING + 15
-    grad_preview = Image.new("RGB", (required_width, 40), (240,240,240))
+    grad_preview = Image.new("RGB", (required_width, 40), BACKGROUND_COLOR)
     grad_preview_draw = ImageDraw.Draw(grad_preview)
     for col in range(col_repeat):
         for num in range(10):
