@@ -2,6 +2,7 @@
 import sys
 import time
 import color_select_dialog
+import export_select_form
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
 from ui_custom_gradient import *
@@ -67,7 +68,7 @@ class MainWindow(QMainWindow):
                                                 self.ui.height_label,
                                                 self.ui.width_label]
         # =========================== menu actions =========================== 
-        self.ui.actionAdd_Preset.triggered.connect(self.save_preset)
+        self.ui.actionAdd_Preset.triggered.connect(self.spawn_save_preset_window)
         self.ui.actionLoad_Preset.triggered.connect(self.load_preset)
 
         # =========================== checkboxes =========================== 
@@ -353,12 +354,20 @@ class MainWindow(QMainWindow):
         return path 
 
 
-    def save_preset(self):
+    def spawn_save_preset_window(self):
+        self.ui_export_select = export_select_form.GradientExportSelect(self)
+        self.ui_export_select.show()
+
+    def save_preset(self, selected_presets):
+        """
+        args:
+            selected_presets (list(GradientCallable))
+        """
         filepath = self.spawn_file_dialog("Save Gradient Presets",
                                           "Gradient Presets (*.g_preset);;All Files (*)")
         if filepath:
             fd = open(filepath, "w")
-            for g in self.custom_gradient_objects:
+            for g in selected_presets:
                 fd.write(g.dump_data())
                 fd.write("\n")
             fd.flush()
