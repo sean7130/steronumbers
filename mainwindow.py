@@ -3,6 +3,7 @@ import sys
 import time
 import color_select_dialog
 import export_select_form
+import save_preview_form
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
 from ui_custom_gradient import *
@@ -101,6 +102,9 @@ class MainWindow(QMainWindow):
 
         # =========================== preview_img =========================== 
         self.reload_image()
+
+        # =========================== Bottom Buttons ==========================
+        self.ui.save_btn.clicked.connect(self.spawn_save_preview)
 
         # === ;) ===
         self.ui.refresh_btn.clicked.connect(self.close_elevator_button)
@@ -306,6 +310,28 @@ class MainWindow(QMainWindow):
         sn.encode_numbers(src_text)
         self.ui.img_preview_label.setPixmap("preview.png")
 
+    def generate_save_preview(self, filename, color):
+        """ 
+        args: 
+            filename (str)
+            color (tuple(int, int, int))
+        this generated image will not affect the mainwinow's preview image
+        instead it will generate a new image under filename, and specified background setting
+
+        avoid setting filename == "preview.png"
+        """
+        src_text = self.get_source_text()
+        if src_text == "":
+            src_text = sn.extract_source()
+
+        if filename[-4:] != ".png":
+            filename += ".png"
+        
+        previous_color = sn.BACKGROUND_COLOR
+        sn.BACKGROUND_COLOR = color
+        sn.encode_numbers(src_text, filename)
+        sn.BACKGROUND_COLOR = previous_color
+
 
     def update_label_and_review_image_size(self, width, height):
         self.ui.img_preview_label.resize(width, height)
@@ -410,6 +436,10 @@ class MainWindow(QMainWindow):
     def generate_one_line_gradient_preview(self, grad_function_callable):
         sn.generate_gradient_preview_image(grad_function_callable)
 
+    # ========================= Spawning Save Preview ====================================
+    def spawn_save_preview(self):
+        self.ui_save_preview = save_preview_form.SavePreview(self)
+        self.ui_save_preview.show()
 
     # =================================== Dbg functions ===================================
     def read_value_out(self, value):

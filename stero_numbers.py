@@ -159,7 +159,7 @@ def normalize_offset(offset, method="default"):
             update_row_with_norm_val(row, norm_val)
 
 def encode_numbers(numbers, filename="preview.png"):
-    draw.rectangle((0, 0, width, height), fill=(240,240,240))
+    draw.rectangle((0, 0, width, height), fill=BACKGROUND_COLOR)
     offset = generate_offset(numbers)
     if len(offset[0]) != len(offset[-1]):
         fill_last_row(offset)
