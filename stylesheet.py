@@ -1,3 +1,5 @@
+user_gradient = "qlineargradient(spread:pad, x1:0, y1:0.596, x2:1, y2:1, stop:0 rgba(149, 114, 255, 255), stop:1 rgba(0, 170, 255, 255))"
+
 stylesheet = '''
 *{
   color: #555555;
@@ -69,12 +71,12 @@ stylesheet = '''
 /*  Basic widgets  */
 
 QWidget {
-  background-color: #ffffff;
+  background-color: #fbfbfb;
 }
 
 QGroupBox {
-  background-color: #ffffff;
-  border: 2px solid #ffffff;
+  background-color: #fbfbfb;
+  border: 2px solid #f0f0f9;
   border-radius: 4px;
 }
 
@@ -119,7 +121,7 @@ QLineEdit,
 QPushButton {
   color: #2979ff;
   background-color: #ffffff;
-  border: 2px solid #2979ff;
+  border: 2px solid %s;
   border-radius: 4px;
   height: 32px;
 }
@@ -354,6 +356,10 @@ QPushButton:flat:focus {
   background-color: rgba(41, 121, 255, 0.2);
 }
 
+QPushButton:hover  {
+  background-color: #e6e6e6
+}
+
 
 /*  ------------------------------------------------------------------------  */
 /*  QTabBar  */
@@ -448,6 +454,7 @@ QGroupBox {
   line-height: 13px;
   text-transform: uppercase;
   font-size: 13px;
+  font-weight: bold;
 }
 
 QGroupBox::title {
@@ -942,7 +949,7 @@ background: #f5f5f5;
 }
 
 QSlider::sub-page {
-background: #2979ff;
+background: %s;
 }
 
 /*  ------------------------------------------------------------------------  */
@@ -973,7 +980,7 @@ QFrame[frameShape="5"] {
 
 QFrame[frameShape="4"],
 QFrame[frameShape="5"] {
-  border-color: #ffffff; /* edit */
+  border-color: #fbfbfb; /* edit */
 }
 
 /*  ------------------------------------------------------------------------  */
@@ -1330,4 +1337,4 @@ QRadioButton::indicator:focus {
 QCheckBox::indicator:focus {
   background-color: rgba(41, 121, 255, 0.2);
  }
-'''
+''' % (user_gradient, user_gradient)

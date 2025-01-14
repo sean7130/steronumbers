@@ -9,7 +9,7 @@ ROW_SPACING = 25
 
 OFFSET = FONT_SPACING // 10
 
-BACKGROUND_COLOR = (240,240,240)
+BACKGROUND_COLOR = (245,245,245)
 
 width, height = 600, 400 
 image = Image.new("RGB", (width, height), "white")

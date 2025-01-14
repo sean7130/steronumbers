@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(833, 559)
+        MainWindow.resize(1068, 604)
         MainWindow.setTabShape(QTabWidget.Rounded)
         self.actionthis_also_does_something = QAction(MainWindow)
         self.actionthis_also_does_something.setObjectName(u"actionthis_also_does_something")
@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         self.parameters = QFrame(self.centralwidget)
         self.parameters.setObjectName(u"parameters")
         self.parameters.setMinimumSize(QSize(200, 0))
-        self.parameters.setMaximumSize(QSize(300, 16777215))
+        self.parameters.setMaximumSize(QSize(400, 16777215))
         self.parameters.setFrameShape(QFrame.StyledPanel)
         self.parameters.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.parameters)
@@ -87,6 +87,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.addWidget(self.label_2)
 
         self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setSpacing(12)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.slide_font_spacing = QSlider(self.f_font_spacing)
         self.slide_font_spacing.setObjectName(u"slide_font_spacing")
@@ -120,6 +121,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.label_column_spacing)
 
         self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setSpacing(12)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.slide_column_spacing = QSlider(self.f_column_spacing)
         self.slide_column_spacing.setObjectName(u"slide_column_spacing")
@@ -153,6 +155,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addWidget(self.label_3)
 
         self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setSpacing(12)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.slide_row_spacing = QSlider(self.f_row_spacing)
         self.slide_row_spacing.setObjectName(u"slide_row_spacing")
@@ -186,6 +189,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.addWidget(self.label_stero_offset)
 
         self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setSpacing(12)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.slide_offset = QSlider(self.f_offset)
         self.slide_offset.setObjectName(u"slide_offset")
@@ -379,7 +383,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
-        self.menuBar.setGeometry(QRect(0, 0, 833, 22))
+        self.menuBar.setGeometry(QRect(0, 0, 1068, 22))
         self.menuFile = QMenu(self.menuBar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuPresets = QMenu(self.menuBar)
