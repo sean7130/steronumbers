@@ -67,6 +67,9 @@ def update_color_schemes(s_color, t_color):
   button_color = f"rgb{decrease_saturation(add_tint(t_color, 0.85), 0.45)}"
   button_after_pressed = f"rgb{decrease_saturation(add_tint(t_color, 0.90), 0.45)}"
 
+  standard_bottom_boarder_color = "#e5e5e5"
+  # standard_bottom_boarder_color = "#e0e0e0" #experimental 
+
   user_gradient = "qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 %s, stop:1 %s)" % (start_color, end_color)
   stylesheet = '''
 
@@ -146,7 +149,7 @@ def update_color_schemes(s_color, t_color):
   QGroupBox {
     background-color: #fbfbfb;
     border: 1px solid #f0f0f9;
-    border-bottom: 3px solid #e5e5e5;
+    border-bottom: 3px solid %s;
     border-radius: 4px;
   }
 
@@ -216,7 +219,28 @@ def update_color_schemes(s_color, t_color):
     border-top-right-radius: 4px;
     height: 32px;
     background-color: rgba(245, 245, 245, 0.75);
-    border: 2px solid rgba(85, 85, 85, 0.2);
+    border: 2px solid %s;
+    border-width: 0 0 2px 0;
+  }
+
+
+  QDateEdit:hover,
+  QDateTimeEdit:hover,
+  QSpinBox:hover,
+  QDoubleSpinBox:hover,
+  QTreeView:hover,
+  QListView:hover,
+  QLineEdit:hover,
+  QComboBox:hover {
+    color: #3c3c3c;
+    padding-left: 16px;
+    border-radius: 0px;
+    border-radius: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: 32px;
+    background-color: rgba(245, 245, 245, 0.75);
+    border: 2px solid %s;
     border-width: 0 0 2px 0;
   }
 
@@ -354,6 +378,22 @@ def update_color_schemes(s_color, t_color):
   QDoubleSpinBox::down-button:disabled,
   QSpinBox::down-button:disabled {
     image: url(icon:/disabled/downarrow.svg);
+  }
+
+  QDoubleSpinBox#width_adjust_spinbox,
+  QDoubleSpinBox#height_adjust_spinbox {
+    background-color: #ffffff;
+    border-radius: 4px;
+    height: 32px;
+  }
+
+  QDoubleSpinBox#width_adjust_spinbox:hover,
+  QDoubleSpinBox#height_adjust_spinbox:hover {
+    background-color: #ffffff;
+    border-radius: 4px;
+    height: 32px;
+    border: 2px solid %s;
+    border-width: 0 0 2px 0;
   }
 
   /*  ------------------------------------------------------------------------  */
@@ -843,7 +883,7 @@ def update_color_schemes(s_color, t_color):
   /*  QMenuBar  */
 
   QMenuBar {
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     color: #555555;
   }
 
@@ -1412,10 +1452,14 @@ def update_color_schemes(s_color, t_color):
     background-color: rgba(41, 121, 255, 0.2);
    }
   ''' % (light_accent,
-         text_color, 
+         standard_bottom_boarder_color, #groupbox bottom border
+         text_color,  #pushbutton text
          user_gradient, 
+         standard_bottom_boarder_color, #input field bottom border
+         user_gradient,
          text_color, 
          text_color, 
+         "rgb(200,200,200)", #TODO deal with the bug that doesn't allow dynmaic color change for the two size spinboxes
          text_color,
          button_color,
          button_color,
@@ -1433,5 +1477,7 @@ def update_color_schemes(s_color, t_color):
          user_gradient,
          user_gradient,
       )
+  print(stylesheet)
+
 
 update_color_schemes(start_color, end_color)

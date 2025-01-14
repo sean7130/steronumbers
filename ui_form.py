@@ -263,6 +263,7 @@ class Ui_MainWindow(object):
 
         self.height_adjust_spinbox = QDoubleSpinBox(self.preview_frame)
         self.height_adjust_spinbox.setObjectName(u"height_adjust_spinbox")
+        self.height_adjust_spinbox.setProperty("groupless", True)
 
         self.horizontalLayout_8.addWidget(self.height_adjust_spinbox)
 
@@ -280,6 +281,7 @@ class Ui_MainWindow(object):
 
         self.width_adjust_spinbox = QDoubleSpinBox(self.preview_frame)
         self.width_adjust_spinbox.setObjectName(u"width_adjust_spinbox")
+        self.width_adjust_spinbox.setProperty("groupless", False)
 
         self.horizontalLayout_8.addWidget(self.width_adjust_spinbox)
 

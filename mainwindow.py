@@ -528,7 +528,13 @@ if __name__ == "__main__":
 
         # some more custom on top of the presets
         app.setStyleSheet(stylesheet.stylesheet)
-        widget.ui.centralwidget.setStyleSheet("background-color : rgb(245, 245, 245)")
+        widget.ui.centralwidget.setStyleSheet("""
+        QWidget#centralwidget {
+            background-color : rgb(245, 245, 245);
+            /*border-top : 3px solid rgba(229, 229, 229, 0.5);*/ /*the typical #e5e5e5 defined for all groups, except rgba*/
+            border-top : 1px solid #f0f0f9
+        }
+        """)
         # widget.ui.parameters.setStyleSheet(stylesheet.stylesheet)
         reapply_stylesheets()
 
