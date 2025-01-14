@@ -8,6 +8,11 @@ import save_preview_form
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
 from ui_custom_gradient import *
 
+EXTERNAL_THEMEING = True
+if EXTERNAL_THEMEING:
+    from qt_material import apply_stylesheet
+    import stylesheet
+
 # Important:
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
@@ -474,11 +479,36 @@ class MainWindow(QMainWindow):
 
     # ==== closing elevator ====
     def close_elevator_button(self):
-        "pressing refresh in this program is equvlent to pressing 'close' in a public elevator"
+        "pressing refresh in this program is equvlent to pressing 'close' in a public elevator ;)"
         return 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = MainWindow()
+    
+    if EXTERNAL_THEMEING:
+        # Themeing
+        extra = {
+            # Button colors
+            'danger': '#dc3545',
+            'warning': '#ffc107',
+            'success': '#17a2b8',
+
+            'font_family': 'Roboto',
+            'density_scale': '0',
+            'button_shape': 'default',
+            'font_size': '13px',
+            'line_height': '0px',
+        }
+        apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True, extra=extra)
+
+        # some more custom on top of the presets
+        app.setStyleSheet(stylesheet.stylesheet)
+        widget.ui.centralwidget.setStyleSheet("background-color : rgb(245, 245, 245)")
+        # widget.ui.parameters.setStyleSheet(stylesheet.stylesheet)
+        widget.ui.gradient_box.setStyleSheet(stylesheet.stylesheet)
+        widget.ui.stereospacing.setStyleSheet(stylesheet.stylesheet)
+        widget.ui.source_numbers_frame.setStyleSheet(stylesheet.stylesheet)
+
     widget.show()
     sys.exit(app.exec_())

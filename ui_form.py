@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_2 = QHBoxLayout(self.centralwidget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setContentsMargins(9, 9, 9, 18)
         self.parameters = QFrame(self.centralwidget)
         self.parameters.setObjectName(u"parameters")
         self.parameters.setMinimumSize(QSize(200, 0))
@@ -289,6 +289,7 @@ class Ui_MainWindow(object):
 
         self.hframe_preview = QFrame(self.vframe_preview)
         self.hframe_preview.setObjectName(u"hframe_preview")
+        self.hframe_preview.setStyleSheet(u"")
         self.hframe_preview.setFrameShape(QFrame.StyledPanel)
         self.hframe_preview.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.hframe_preview)
@@ -322,7 +323,7 @@ class Ui_MainWindow(object):
 
         self.gradient_box = QGroupBox(self.preview_frame)
         self.gradient_box.setObjectName(u"gradient_box")
-        self.gradient_box.setMaximumSize(QSize(16777215, 58))
+        self.gradient_box.setMaximumSize(QSize(16777215, 16777215))
         self.verticalLayout_10 = QVBoxLayout(self.gradient_box)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.verticalLayout_10.setContentsMargins(6, 6, 6, 6)
@@ -375,17 +376,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.preview_frame)
 
-        self.line = QFrame(self.centralwidget)
-        self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.VLine)
-        self.line.setFrameShadow(QFrame.Sunken)
-
-        self.horizontalLayout_2.addWidget(self.line)
-
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QStatusBar(MainWindow)
-        self.statusbar.setObjectName(u"statusbar")
-        MainWindow.setStatusBar(self.statusbar)
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
         self.menuBar.setGeometry(QRect(0, 0, 833, 22))
