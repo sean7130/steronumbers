@@ -65,6 +65,7 @@ def update_color_schemes(s_color, t_color):
   text_color = f"rgb{gen_text_color(t_color)}"
   light_accent = f"rgb{gen_text_color(t_color, 120)}"
   button_color = f"rgb{decrease_saturation(add_tint(t_color, 0.85), 0.45)}"
+  button_after_pressed = f"rgb{decrease_saturation(add_tint(t_color, 0.90), 0.45)}"
 
   print(end_color)
 
@@ -382,7 +383,7 @@ def update_color_schemes(s_color, t_color):
   }
 
   QPushButton:flat:hover {
-    background-color: rgba(41, 121, 255, 0.1);
+    background-color: %s;
   }
 
   QPushButton:flat:pressed,
@@ -414,17 +415,17 @@ def update_color_schemes(s_color, t_color):
 
   QToolButton:focus,
   QPushButton:focus {
-    background-color: rgba(41, 121, 255, 0.2);
+    background-color: %s;
   }
 
   QPushButton:checked:focus,
   QPushButton:pressed:focus {
-    background-color: rgba(41, 121, 255, 0.8);
+    background-color: %s;
   }
 
   QPushButton:flat:focus {
     border: none;
-    background-color: rgba(41, 121, 255, 0.2);
+    background-color: %s;
   }
 
   QPushButton:hover  {
@@ -1415,6 +1416,10 @@ def update_color_schemes(s_color, t_color):
          text_color, 
          text_color,
          button_color,
+         button_color,
+         button_after_pressed,
+         button_after_pressed,
+         button_after_pressed,
          light_accent,
          user_gradient
       )

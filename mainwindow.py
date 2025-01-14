@@ -514,7 +514,7 @@ if __name__ == "__main__":
             'font_size': '13px',
             'line_height': '0px',
         }
-        apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True, extra=extra)
+        apply_stylesheet(app, theme='color_scheme.xml', invert_secondary=True, extra=extra)
 
         # some more custom on top of the presets
         app.setStyleSheet(stylesheet.stylesheet)

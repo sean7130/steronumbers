@@ -98,6 +98,7 @@ class Ui_MainWindow(object):
 
         self.spin_font_spacing = QDoubleSpinBox(self.f_font_spacing)
         self.spin_font_spacing.setObjectName(u"spin_font_spacing")
+        self.spin_font_spacing.setMinimumSize(QSize(80, 0))
         self.spin_font_spacing.setMaximum(100.000000000000000)
 
         self.horizontalLayout_3.addWidget(self.spin_font_spacing)
@@ -132,6 +133,7 @@ class Ui_MainWindow(object):
 
         self.spin_column_spacing = QDoubleSpinBox(self.f_column_spacing)
         self.spin_column_spacing.setObjectName(u"spin_column_spacing")
+        self.spin_column_spacing.setMinimumSize(QSize(80, 0))
         self.spin_column_spacing.setMaximum(100.000000000000000)
 
         self.horizontalLayout.addWidget(self.spin_column_spacing)
@@ -166,6 +168,7 @@ class Ui_MainWindow(object):
 
         self.spin_row_spacing = QDoubleSpinBox(self.f_row_spacing)
         self.spin_row_spacing.setObjectName(u"spin_row_spacing")
+        self.spin_row_spacing.setMinimumSize(QSize(80, 0))
         self.spin_row_spacing.setMaximum(100.000000000000000)
 
         self.horizontalLayout_4.addWidget(self.spin_row_spacing)
@@ -200,6 +203,7 @@ class Ui_MainWindow(object):
 
         self.spin_offset = QDoubleSpinBox(self.f_offset)
         self.spin_offset.setObjectName(u"spin_offset")
+        self.spin_offset.setMinimumSize(QSize(80, 0))
         self.spin_offset.setMaximum(100.000000000000000)
 
         self.horizontalLayout_5.addWidget(self.spin_offset)
