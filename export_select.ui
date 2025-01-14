@@ -21,12 +21,18 @@
        <property name="text">
         <string>Select All</string>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btn_deselect_all">
        <property name="text">
         <string>Deselect All</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

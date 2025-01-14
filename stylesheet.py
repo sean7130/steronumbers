@@ -857,7 +857,7 @@ def update_color_schemes(s_color, t_color):
   QMenuBar::item:selected,
   QMenuBar::item:pressed {
     color: #3c3c3c;
-    background-color: #75a7ff;
+    background-color: %s;
   }
 
   /*  ------------------------------------------------------------------------  */
@@ -906,7 +906,7 @@ def update_color_schemes(s_color, t_color):
   }
 
   QScrollBar::handle {
-    background: rgba(41, 121, 255, 0.1);
+    background: %s;
   }
 
   QScrollBar::handle:horizontal {
@@ -919,7 +919,7 @@ def update_color_schemes(s_color, t_color):
 
   QScrollBar::handle:vertical:hover,
   QScrollBar::handle:horizontal:hover {
-    background: #2979ff;
+    background: %s;
   }
 
   QScrollBar::add-line:vertical,
@@ -1158,8 +1158,8 @@ def update_color_schemes(s_color, t_color):
   QTableView::item:selected,
   QTreeView::item:selected,
   QListView::item:selected {
-    background-color: rgba(41, 121, 255, 0.2);
-    selection-background-color: rgba(41, 121, 255, 0.2);
+    background-color: %s;
+    selection-background-color: %s;
     color: #555555;
     selection-color: #555555; /* For Windows */
   }
@@ -1167,8 +1167,8 @@ def update_color_schemes(s_color, t_color):
   QTableView::item:selected:focus,
   QTreeView::item:selected:focus,
   QListView::item:selected:focus {
-    background-color: #2979ff;
-    selection-background-color: #2979ff;
+    background-color: %s;
+    selection-background-color: %s;
     color: #3c3c3c;
     selection-color: #3c3c3c; /* For Windows */
   }
@@ -1178,7 +1178,7 @@ def update_color_schemes(s_color, t_color):
   }
 
   QTableView:focus {
-    selection-background-color: #2979ff;
+    selection-background-color: %s;
   }
 
   QTableView::item:disabled {
@@ -1423,7 +1423,15 @@ def update_color_schemes(s_color, t_color):
          button_after_pressed,
          button_after_pressed,
          light_accent,
-         user_gradient
+         light_accent,
+         light_accent,
+         text_color,
+         user_gradient,
+         light_accent,
+         light_accent,
+         user_gradient,
+         user_gradient,
+         user_gradient,
       )
 
 update_color_schemes(start_color, end_color)

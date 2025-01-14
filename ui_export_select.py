@@ -24,11 +24,13 @@ class Ui_Form(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.btn_select_all = QPushButton(Form)
         self.btn_select_all.setObjectName(u"btn_select_all")
+        self.btn_select_all.setFlat(True)
 
         self.horizontalLayout_2.addWidget(self.btn_select_all)
 
         self.btn_deselect_all = QPushButton(Form)
         self.btn_deselect_all.setObjectName(u"btn_deselect_all")
+        self.btn_deselect_all.setFlat(True)
 
         self.horizontalLayout_2.addWidget(self.btn_deselect_all)
 
