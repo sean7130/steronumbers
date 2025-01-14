@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>407</width>
-    <height>170</height>
+    <width>418</width>
+    <height>364</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color : rgb(245, 245, 245)</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
@@ -161,7 +164,10 @@
       <item>
        <widget class="QPushButton" name="custom_color_button">
         <property name="text">
-         <string>Custom...</string>
+         <string>Customize</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -194,6 +200,9 @@
       <widget class="QPushButton" name="close_button">
        <property name="text">
         <string>Cancel</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

@@ -83,6 +83,16 @@ class CustomGradientWindow(Ui_Dialog):
         self.mainwindow = parent
         self.setupUi(self)
 
+        # =========================== styling =============================
+        # self.Dialog.setStyleSheet("background-color : rgb(245, 245, 245)")
+        self.top_level_widgets = [
+            self.buttonBox,
+            self.line_edit_save_gradient,
+            self.line_preview,
+            self.groupBox
+        ]
+        # self.apply_stylesheet will be called by parent
+
         # =============================== Setup =============================== 
         self.selected_colors = {START_COLOR_STR: QColor(170,255,0), END_COLOR_STR: QColor(85,170,127)}
         self.generate_and_set_preview() # for the init colors
@@ -153,6 +163,10 @@ class CustomGradientWindow(Ui_Dialog):
             # special case if the gradent seelect combobox is selected on "last custom", then update
             if self.mainwindow.ui.gradient_select.currentIndex() == self.mainwindow.last_unsaved_custom_slot:
                 self.mainwindow.update_gradient_settings(self.mainwindow.last_unsaved_custom_slot)
+
+    def apply_stylesheet(self, stylesheet):
+        for w in self.top_level_widgets:
+            w.setStyleSheet(stylesheet)
             
 
 def get_gradient_diaglog(mainwindow):

@@ -67,9 +67,7 @@ def update_color_schemes(s_color, t_color):
   button_color = f"rgb{decrease_saturation(add_tint(t_color, 0.85), 0.45)}"
   button_after_pressed = f"rgb{decrease_saturation(add_tint(t_color, 0.90), 0.45)}"
 
-  print(end_color)
-
-  user_gradient = "qlineargradient(spread:pad, x1:0, y1:0.596, x2:1, y2:1, stop:0 %s, stop:1 %s)" % (start_color, end_color)
+  user_gradient = "qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 %s, stop:1 %s)" % (start_color, end_color)
   stylesheet = '''
 
   *{
@@ -150,6 +148,10 @@ def update_color_schemes(s_color, t_color):
     border: 1px solid #f0f0f9;
     border-bottom: 3px solid #e5e5e5;
     border-radius: 4px;
+  }
+
+  QFrame {
+    background: transparent;
   }
 
   QGroupBox.fill_background {

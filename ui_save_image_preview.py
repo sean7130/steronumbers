@@ -17,7 +17,8 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(407, 170)
+        Form.resize(418, 364)
+        Form.setStyleSheet(u"background-color : rgb(245, 245, 245)")
         self.verticalLayout_3 = QVBoxLayout(Form)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.vframe_preview = QFrame(Form)
@@ -88,6 +89,7 @@ class Ui_Form(object):
 
         self.custom_color_button = QPushButton(self.groupBox)
         self.custom_color_button.setObjectName(u"custom_color_button")
+        self.custom_color_button.setFlat(True)
 
         self.horizontalLayout_2.addWidget(self.custom_color_button)
 
@@ -107,6 +109,7 @@ class Ui_Form(object):
 
         self.close_button = QPushButton(Form)
         self.close_button.setObjectName(u"close_button")
+        self.close_button.setFlat(True)
 
         self.horizontalLayout.addWidget(self.close_button)
 
@@ -126,7 +129,7 @@ class Ui_Form(object):
         self.radio_white.setText(QCoreApplication.translate("Form", u"White", None))
         self.radio_black.setText(QCoreApplication.translate("Form", u"Black", None))
         self.radio_default.setText(QCoreApplication.translate("Form", u"Windows UI Default (240)", None))
-        self.custom_color_button.setText(QCoreApplication.translate("Form", u"Custom...", None))
+        self.custom_color_button.setText(QCoreApplication.translate("Form", u"Customize", None))
         self.save_button.setText(QCoreApplication.translate("Form", u"Save", None))
         self.close_button.setText(QCoreApplication.translate("Form", u"Cancel", None))
     # retranslateUi

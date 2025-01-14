@@ -401,6 +401,7 @@ class MainWindow(QMainWindow):
 
     def spawn_save_preset_window(self):
         self.ui_export_select = export_select_form.GradientExportSelect(self)
+        self.ui_export_select.setStyleSheet(stylesheet.stylesheet)
         self.ui_export_select.show()
 
     def save_preset(self, selected_presets):
@@ -443,6 +444,7 @@ class MainWindow(QMainWindow):
         if not self.custom_gradient_dialog_been_setup:
             self.ui_gradient_diag = color_select_dialog.get_gradient_diaglog(self)
             self.custom_gradient_dialog_been_setup = True
+        self.ui_gradient_diag.apply_stylesheet(stylesheet.stylesheet)
         self.ui_gradient_diag.exec_()
 
     # ========================= Interface Functions w Color Picker ========================
@@ -453,7 +455,17 @@ class MainWindow(QMainWindow):
     # ========================= Spawning Save Preview ====================================
     def spawn_save_preview(self):
         self.ui_save_preview = save_preview_form.SavePreview(self)
+        self.ui_save_preview.apply_stylesheet(stylesheet.stylesheet)
         self.ui_save_preview.show()
+
+    # =============================== Reapplying Stylesheets ==============================
+    def apply_stylesheet(self):
+        # all other windows can be reappled stylesheet in their function, but it's this window's
+        # responsibity to supply the stylesheet
+
+        self.ui.gradient_box.setStyleSheet(stylesheet.stylesheet)         
+        self.ui.stereospacing.setStyleSheet(stylesheet.stylesheet)        
+        self.ui.source_numbers_frame.setStyleSheet(stylesheet.stylesheet) 
 
     # =================================== Dbg functions ===================================
     def read_value_out(self, value):
@@ -492,9 +504,7 @@ class MainWindow(QMainWindow):
         return 
 
 def reapply_stylesheets():
-    widget.ui.gradient_box.setStyleSheet(stylesheet.stylesheet)
-    widget.ui.stereospacing.setStyleSheet(stylesheet.stylesheet)
-    widget.ui.source_numbers_frame.setStyleSheet(stylesheet.stylesheet)
+    widget.apply_stylesheet()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

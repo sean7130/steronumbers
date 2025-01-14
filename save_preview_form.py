@@ -9,6 +9,13 @@ class SavePreview(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+        self.top_level_widgets = [
+            self.ui.groupBox,
+            self.ui.vframe_preview,
+            self.ui.close_button,
+            self.ui.save_button
+        ]
+
         self.save_preview_str = "preview_save.png"
 
         self.radio_buttons = [self.ui.radio_white, 
@@ -62,3 +69,8 @@ class SavePreview(QWidget):
     def update_settings(self, color):
         self.mainwindow.generate_save_preview(self.save_preview_str, color)
         self.ui.img_preview_label.setPixmap(self.save_preview_str)
+
+    def apply_stylesheet(self, stylesheet):
+        for w in self.top_level_widgets:
+            w.setStyleSheet(stylesheet)
+        
