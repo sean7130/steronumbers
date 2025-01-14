@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog, QMessageBox
 from ui_save_image_preview import *
 from shutil import copy
 
@@ -41,7 +41,28 @@ class SavePreview(QWidget):
         )
 
         if path:
-            copy(self.save_preview_str, path)
+            msg = QMessageBox()
+            msg.setWindowTitle("Save File")
+            msg.setStandardButtons(QMessageBox.Ok)
+            try:
+                copy(self.save_preview_str, path)
+                msg.setText("Save Sucessful!")
+                msg.setIcon(QMessageBox.Information)
+                msg.exec()
+                # upon save success, close window
+                self.close()
+
+            except PermissionError as e:
+                print(f"Permission denied: {e}")
+                msg.setText(f"Permission denied: {e}")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec()
+            except OSError as e:
+                print(f"OS error: {e}")
+                msg.setText(f"OS error: {e}")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec()
+
 
     def select_custom_bg(self):
         color = QColorDialog.getColor()
