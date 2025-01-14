@@ -68,24 +68,23 @@ class SavePreview(QWidget):
         color = QColorDialog.getColor()
         if color.isValid():
             self.update_settings((color.red(), color.green(), color.blue()))
+            # deselect everything else in the list
+            for r in self.radio_buttons:
+                print(f"deselecting {r}")
+                r.setAutoExclusive(False)
+                r.setChecked(False)
+                r.setAutoExclusive(True)
 
     def update_to_white(self):
         self.update_settings((255,255,255))
+        # note QRadioButton by design will deselect others in group upon press. 
+        # therefore, no futher logic required for handling
 
     def update_to_black(self):
         self.update_settings((0, 0, 0))
 
     def update_to_default(self):
         self.update_settings((240, 240, 240))
-
-    # function might not be needed
-    # def update_state(checked_idx):
-    #     for i in range(len(self.radio_buttons)):
-    #         if i == checked_idx:
-    #             self.radio_buttons[i].setDown(True)
-    #         else:
-    #             self.radio_buttons[i].setDown(False)
-
 
     def update_settings(self, color):
         self.mainwindow.generate_save_preview(self.save_preview_str, color)
