@@ -364,8 +364,17 @@ class MainWindow(QMainWindow):
                                            containing_frame_height-52*2)
 
     def update_gradient_settings(self, new_idx):
+        # image
         sn.STERO_COLOR_GRADIENT = self.collection_gradients[new_idx]
         self.reload_image()
+
+        # color themes
+        if EXTERNAL_THEMEING:
+            start_color = self.collection_gradients[new_idx](0)
+            end_color = self.collection_gradients[new_idx](9)
+            print(start_color)
+            stylesheet.update_color_schemes(start_color, end_color)
+            reapply_stylesheets()
 
     def add_new_gradient(self, gradient, name=""):
         self.collection_gradients.append(gradient.grad_function)
@@ -482,12 +491,17 @@ class MainWindow(QMainWindow):
         "pressing refresh in this program is equvlent to pressing 'close' in a public elevator ;)"
         return 
 
+def reapply_stylesheets():
+    widget.ui.gradient_box.setStyleSheet(stylesheet.stylesheet)
+    widget.ui.stereospacing.setStyleSheet(stylesheet.stylesheet)
+    widget.ui.source_numbers_frame.setStyleSheet(stylesheet.stylesheet)
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = MainWindow()
     
+    # Themeing
     if EXTERNAL_THEMEING:
-        # Themeing
         extra = {
             # Button colors
             'danger': '#dc3545',
@@ -506,9 +520,7 @@ if __name__ == "__main__":
         app.setStyleSheet(stylesheet.stylesheet)
         widget.ui.centralwidget.setStyleSheet("background-color : rgb(245, 245, 245)")
         # widget.ui.parameters.setStyleSheet(stylesheet.stylesheet)
-        widget.ui.gradient_box.setStyleSheet(stylesheet.stylesheet)
-        widget.ui.stereospacing.setStyleSheet(stylesheet.stylesheet)
-        widget.ui.source_numbers_frame.setStyleSheet(stylesheet.stylesheet)
+        reapply_stylesheets()
 
     widget.show()
     sys.exit(app.exec_())

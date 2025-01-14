@@ -62,6 +62,7 @@ class Ui_MainWindow(object):
 
         self.import_btn = QPushButton(self.source_numbers_frame)
         self.import_btn.setObjectName(u"import_btn")
+        self.import_btn.setFlat(False)
 
         self.verticalLayout_3.addWidget(self.import_btn)
 
@@ -351,6 +352,7 @@ class Ui_MainWindow(object):
 
         self.btn_customize = QPushButton(self.l_shift)
         self.btn_customize.setObjectName(u"btn_customize")
+        self.btn_customize.setFlat(True)
 
         self.horizontalLayout_7.addWidget(self.btn_customize)
 
@@ -360,11 +362,13 @@ class Ui_MainWindow(object):
 
         self.refresh_btn = QPushButton(self.l_shift)
         self.refresh_btn.setObjectName(u"refresh_btn")
+        self.refresh_btn.setFlat(True)
 
         self.horizontalLayout_7.addWidget(self.refresh_btn)
 
         self.save_btn = QPushButton(self.l_shift)
         self.save_btn.setObjectName(u"save_btn")
+        self.save_btn.setFlat(False)
 
         self.horizontalLayout_7.addWidget(self.save_btn)
 
