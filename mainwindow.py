@@ -374,7 +374,7 @@ class MainWindow(QMainWindow):
             end_color = self.collection_gradients[new_idx](9)
             print(start_color)
             stylesheet.update_color_schemes(start_color, end_color)
-            reapply_stylesheets()
+            self.apply_stylesheet(stylesheet.stylesheet)
 
     def add_new_gradient(self, gradient, name=""):
         self.collection_gradients.append(gradient.grad_function)
@@ -445,7 +445,7 @@ class MainWindow(QMainWindow):
             self.ui_gradient_diag = color_select_dialog.get_gradient_diaglog(self)
             self.custom_gradient_dialog_been_setup = True
         self.ui_gradient_diag.apply_stylesheet(stylesheet.stylesheet)
-        self.ui_gradient_diag.exec_()
+        self.ui_gradient_diag.show()
 
     # ========================= Interface Functions w Color Picker ========================
 
@@ -459,13 +459,13 @@ class MainWindow(QMainWindow):
         self.ui_save_preview.show()
 
     # =============================== Reapplying Stylesheets ==============================
-    def apply_stylesheet(self):
+    def apply_stylesheet(self, s=stylesheet.stylesheet):
         # all other windows can be reappled stylesheet in their function, but it's this window's
         # responsibity to supply the stylesheet
 
-        self.ui.gradient_box.setStyleSheet(stylesheet.stylesheet)         
-        self.ui.stereospacing.setStyleSheet(stylesheet.stylesheet)        
-        self.ui.source_numbers_frame.setStyleSheet(stylesheet.stylesheet) 
+        self.ui.gradient_box.setStyleSheet(s)
+        self.ui.stereospacing.setStyleSheet(s)
+        self.ui.source_numbers_frame.setStyleSheet(s)
 
     # =================================== Dbg functions ===================================
     def read_value_out(self, value):
@@ -504,7 +504,7 @@ class MainWindow(QMainWindow):
         return 
 
 def reapply_stylesheets():
-    widget.apply_stylesheet()
+    widget.apply_stylesheet(stylesheet.stylesheet)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

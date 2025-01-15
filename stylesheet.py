@@ -1477,7 +1477,7 @@ def update_color_schemes(s_color, t_color):
          user_gradient,
          user_gradient,
       )
-  print(stylesheet)
+  # print(stylesheet)
 
 
 update_color_schemes(start_color, end_color)
