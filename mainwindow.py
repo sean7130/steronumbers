@@ -444,13 +444,31 @@ class MainWindow(QMainWindow):
         if not self.custom_gradient_dialog_been_setup:
             self.ui_gradient_diag = color_select_dialog.get_gradient_diaglog(self)
             self.custom_gradient_dialog_been_setup = True
-        self.ui_gradient_diag.apply_stylesheet(stylesheet.stylesheet)
+        
+
+        ###### TODO: remove this part and integerate with the rest of the program #####
+        temp_s = self.ui_gradient_diag.selected_colors[color_select_dialog.START_COLOR_STR]
+        temp_t = self.ui_gradient_diag.selected_colors[color_select_dialog.END_COLOR_STR]
+        ss = self.ui_gradient_diag.request_custom_stylesheet(temp_s, temp_t)
+        ###############################################################################
         self.ui_gradient_diag.show()
+        ###### TODO: remove this part and integerate with the rest of the program #####
+        self.ui_gradient_diag.apply_stylesheet(ss)
+        ###############################################################################
 
     # ========================= Interface Functions w Color Picker ========================
 
     def generate_one_line_gradient_preview(self, grad_function_callable):
         sn.generate_gradient_preview_image(grad_function_callable)
+
+    def provide_one_time_stylesheet(self, s, t):
+        """
+        provide a temp stylesheet for the gradient picker since 
+        it may use a different theme than the rest
+        """
+        s_rgb_tuple = (s.red(), s.green(), s.blue())
+        t_rgb_tuple = (t.red(), t.green(), t.blue())
+        return stylesheet.update_color_schemes(s_rgb_tuple, t_rgb_tuple, tmp_stylesheet=True)
 
     # ========================= Spawning Save Preview ====================================
     def spawn_save_preview(self):

@@ -1,4 +1,5 @@
 import sys, os
+from random import randint
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog
 from ui_custom_gradient import *
 
@@ -78,7 +79,7 @@ class GradientCallable():
 
 
 class CustomGradientWindow(Ui_Dialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, s_color=QColor(170,255,0), t_color=QColor(85,170,127)):
         super().__init__()
         self.mainwindow = parent
         self.setupUi(self)
@@ -94,8 +95,9 @@ class CustomGradientWindow(Ui_Dialog):
         # self.apply_stylesheet will be called by parent
 
         # =============================== Setup =============================== 
-        self.selected_colors = {START_COLOR_STR: QColor(170,255,0), END_COLOR_STR: QColor(85,170,127)}
-        self.generate_and_set_preview() # for the init colors
+        self.selected_colors = {START_COLOR_STR: s_color, END_COLOR_STR: t_color}
+        self.update_color(self.btn_edit_start_color, self.start_color_label, START_COLOR_STR, manual_color=s_color)
+        self.update_color(self.btn_edit_end_color, self.end_color_label, END_COLOR_STR, manual_color=t_color)
 
         # ============================== Buttons ============================== 
         self.btn_edit_start_color.clicked.connect(self.determine_start_color)
@@ -124,9 +126,15 @@ class CustomGradientWindow(Ui_Dialog):
 
         self.mainwindow.collection_gradients[self.mainwindow.last_unsaved_custom_slot] = custom_grad_function
         self.pending_gradient = g
+
+        # update the stylesheet based on the colors have selected via help from the mainwindow (parent) window
+        self.apply_stylesheet(self.request_custom_stylesheet(
+            self.selected_colors[START_COLOR_STR],
+            self.selected_colors[END_COLOR_STR])
+                                  )
         return custom_grad_function
 
-    def update_color(self, associated_button=None, associated_label=None, color_type=None):
+    def update_color(self, associated_button=None, associated_label=None, color_type=None, manual_color=None):
         """
         args:
             associated_button: QPushButton
@@ -134,7 +142,11 @@ class CustomGradientWindow(Ui_Dialog):
             color_type: str
         """
 
-        color = QColorDialog.getColor()
+        if manual_color:
+            color = manual_color
+        else:
+            color = QColorDialog.getColor()
+
         if color.isValid():
             self.selected_colors[color_type] = color
             r = color.red()
@@ -164,11 +176,27 @@ class CustomGradientWindow(Ui_Dialog):
             if self.mainwindow.ui.gradient_select.currentIndex() == self.mainwindow.last_unsaved_custom_slot:
                 self.mainwindow.update_gradient_settings(self.mainwindow.last_unsaved_custom_slot)
 
+
+    def request_custom_stylesheet(self, s_color, t_color):
+        return self.mainwindow.provide_one_time_stylesheet(s_color, t_color)
+
     def apply_stylesheet(self, stylesheet):
         for w in self.top_level_widgets:
             w.setStyleSheet(stylesheet)
             
 
-def get_gradient_diaglog(mainwindow):
-    ret = CustomGradientWindow(mainwindow)
+def get_gradient_diaglog(mainwindow, s=None, t=None):
+    if s and t:
+        ret = CustomGradientWindow(mainwindow, s_color=s, t_color=t)
+    else:
+        # radnom color generation
+        s = [randint(0,255) for _ in range(3)]
+        t = [randint(0,255) for _ in range(3)]
+        s[randint(0, 2)] = 255
+        t[randint(0, 2)] = 255
+        print(s)
+        print("s is:", s)
+        s_color = QColor(s[0], s[1], s[2])
+        t_color = QColor(t[0], t[1], t[2])
+        ret = CustomGradientWindow(mainwindow, s_color=s_color, t_color=t_color)
     return ret

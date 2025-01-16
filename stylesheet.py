@@ -53,11 +53,14 @@ def gen_text_color(base_color, delta=-40):
   return tuple(ret)
 
 
-def update_color_schemes(s_color, t_color):
+def update_color_schemes(s_color, t_color, tmp_stylesheet=False):
+  # tmp_stylesheet means the generated stylesheet will not be used globally
+  if not tmp_stylesheet:
+    global stylesheet
+
   global user_gradient
   global start_color
   global end_color
-  global stylesheet
   global text_color
 
   start_color = f"rgb{s_color}"
@@ -1478,6 +1481,7 @@ def update_color_schemes(s_color, t_color):
          user_gradient,
       )
   # print(stylesheet)
+  return stylesheet
 
 
 update_color_schemes(start_color, end_color)
