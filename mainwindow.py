@@ -1,6 +1,5 @@
 # This Python file uses the following encoding: utf-8
 import sys
-import time
 import color_select_dialog
 import export_select_form
 import save_preview_form

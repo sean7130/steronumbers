@@ -1,6 +1,6 @@
 import sys, os
 from random import randint
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog
+from PySide2.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog
 from ui_custom_gradient import *
 
 START_COLOR_STR = "Start Color"
@@ -194,8 +194,6 @@ def get_gradient_diaglog(mainwindow, s=None, t=None):
         t = [randint(0,255) for _ in range(3)]
         s[randint(0, 2)] = 255
         t[randint(0, 2)] = 255
-        print(s)
-        print("s is:", s)
         s_color = QColor(s[0], s[1], s[2])
         t_color = QColor(t[0], t[1], t[2])
         ret = CustomGradientWindow(mainwindow, s_color=s_color, t_color=t_color)
