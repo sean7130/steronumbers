@@ -1,6 +1,6 @@
 import sys, os
 from random import randint
-from PySide2.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QColorDialog
 from ui_custom_gradient import *
 
 START_COLOR_STR = "Start Color"
